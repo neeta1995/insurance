@@ -1,0 +1,214 @@
+<html>
+    <head>
+        <title>Form</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!-- <style>
+            input:focus {
+                        color: red;
+                        outline: 2px solid orange;  
+                        }
+        </style> -->
+    </head>
+    <body>
+<div class="container-fluid">
+    <h3>Insurance Policy Form</h3>
+    <br>
+ <form method="POST" action="/details">
+      <div class="form-group row">
+        <label class="col-sm-2">Agent id</label>
+        <div class="col-sm-4">
+        <input type="text" id="agentId" name="agentId" class="form-control" placeholder="Enter agent id">
+        </div>
+     </div>
+      <div class="form-group row">
+        <label class="col-sm-2">Insurance Company</label>
+        <div class="col-sm-4">
+        <input type="text" name="insuranceCompany" id="insuranceCompany" class="form-control" placeholder="Enter insurance company">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2">Product</label>
+        <div class="col-sm-4">
+        <input type="text" name="product" id="product" class="form-control" placeholder="Enter product name">
+    </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2">Customer Name</label>
+        <div class="col-sm-4">
+        <input type="text" name="customerName" id="customerName" class="form-control" placeholder="Enter customer name">
+    </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2">Customer Email</label>
+        <div class="col-sm-4">
+        <input type="email" name="customerEmail" id="customerEmail" class="form-control" placeholder="Enter customer email">
+    </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2">Premium Frequency</label>
+        <div class="col-sm-4">
+        <select name="premiumFreq" id="premiumFreq" class="form-control">
+          <option value = "" selected>Select frequency</option>
+          <option value = "12">monthly</option>
+          <option value = "52">weekly</option>
+          <option value = "4">quarterly</option>
+          <option value = "6">semi annually</option>
+          <option value = "1">annually</option>
+        </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2">Policy Number</label>
+        <div class="col-sm-4">
+        <input type="text" name="policyNo" id="policyNo" class="form-control" placeholder="Enter policy number">
+    </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2">Premium Amount</label>
+        <div class="col-sm-4">
+        <input type="text" name="premiumAmt" id="premiumAmt" class="form-control" onkeypress="return isNumberKey(event)" placeholder="Enter premium amount" onkeyup="return calculate()">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2">Yearly</label>
+        <div class="col-sm-4">
+        <input type="text" name="yearly" id="yearly" class="form-control"  placeholder="">
+        </div>
+      </div>
+   <div class="form-group" style="margin-left:25%">
+       <button class="btn btn-primary" type="submit" onclick="return validate()">Submit</button>   
+    <button class="btn btn-primary" type="submit" onclick="clear()">Clear</button>
+</div>
+     
+    </form>
+  </div>
+</body>
+<script>
+    function clear(){
+        document.getElementsByClassName("form-control").value="";
+    }
+
+    function validate(){
+        var agentId = document.getElementById("agentId");
+        var insuranceCompany = document.getElementById("insuranceCompany");
+        var product = document.getElementById("product");
+        var customerName= document.getElementById("customerName");
+        var customerEmail = document.getElementById("customerEmail");
+        var premiumFreq = document.getElementById("premiumFreq");
+        var policyNo= document.getElementById("policyNo");
+        var premiumAmt= document.getElementById("premiumAmt");
+        var yearly = document.getElementById("yearly");
+        var regEmail = /\S+@\S+\.\S+/;
+    
+
+
+        if(agentId.value==""){
+           
+            agentId.focus()
+           return false;
+           
+        }
+      else if(insuranceCompany.value==""){
+           
+            insuranceCompany.focus()
+            return false;
+            
+        }
+        else if(product.value==""){
+           
+            product.focus();
+            return false;
+            
+        }
+        else if(customerName.value==""){
+            
+            customerName.focus();
+            return false;
+        }
+        else if(customerEmail.value==""){
+           
+            customerEmail.focus();
+            return false;
+        }
+        else if(premiumFreq.value==""){
+          
+            premiumFreq.focus();
+            return false;
+        }
+        else if(policyNo.value==""){
+          
+            policyNo.focus();
+            return false;
+        }
+        else if(premiumAmt.value==""){
+            
+            premiumAmt.focus();
+            return false;
+        }
+        else if(premiumAmt.value==""){
+            
+            premiumAmt.focus();
+            return false;
+        }
+       
+       
+        
+        if(!regEmail.test(customerEmail.value))
+         {
+             alert("Please enter a valid email address")
+             customerEmail.focus()
+             return false
+             }
+
+    }
+
+    function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    return !(charCode > 31 && (charCode < 48 || charCode > 57));
+    }
+
+    function clear(){
+        document.getElementsByClassName("form-control").value=""
+    }
+
+    function calculate()
+    {
+        var premFreq = document.getElementById("premiumFreq")
+        var yearly = document.getElementById("yearly")
+        var premiumAmt = document.getElementById("premiumAmt")
+        console.log(premFreq.value)
+        
+        //document.getElementById("yearly").value = premiumAmt
+        
+        if(premFreq.value==='1')
+        {
+           
+            yearly.value = premiumAmt.value
+            return false;
+        }
+        else if(premFreq.value==='12')
+        {
+            yearly.value = premiumAmt.value *  12
+            return false;
+        }
+        else if(premFreq.value==='52')
+        {
+            yearly.value = premiumAmt.value *  52
+            return false;
+        }
+        else if(premFreq.value==='4')
+        {
+            yearly.value = premiumAmt.value * 4
+            return false;
+        }
+        else if(premFreq.value==='6')
+        {
+            yearly.value = premiumAmt.value *  6
+            return false;
+        }
+       
+    }
+
+    
+    </script>
+  </html>
